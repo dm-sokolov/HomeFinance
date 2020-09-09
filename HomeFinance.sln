@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HF.Web", "HF.Web\HF.Web.csproj", "{40741852-C946-4484-9F26-28F5E2C89BBE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0A48C014-0B7A-470C-B551-CEC9499B9303}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HF.Web", "src\HF.Web\HF.Web.csproj", "{40741852-C946-4484-9F26-28F5E2C89BBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,9 +18,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{40741852-C946-4484-9F26-28F5E2C89BBE} = {0A48C014-0B7A-470C-B551-CEC9499B9303}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09DA0117-B14A-4F12-A457-782676D3374E}
