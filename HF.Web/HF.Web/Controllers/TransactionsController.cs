@@ -22,7 +22,19 @@ namespace HF.Web.Controllers
         // GET: Transactions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Transaction.ToListAsync());
+            var model = await _context.Transaction.ToListAsync();
+            var fullModel = model.Select(s => new Transaction
+            {
+                Id = s.Id,
+                Amount = s.Amount,
+                OperationDateTime = s.OperationDateTime,
+                Category = _context.Category.Where(w=>w.Id==s.CategoryId).Select(k=>k).FirstOrDefault(),
+                Currency = _context.Currency.Where(w=>w.Id==s.CurrencyId).Select(k=>k).FirstOrDefault(),
+                Operation = _context.Operation.Where(w=>w.Id==s.OperationId).Select(k=>k).FirstOrDefault(),
+                Unit = _context.Unit.Where(w=>w.Id==s.UnitId).Select(k=>k).FirstOrDefault()
+            }).ToList();
+            
+            return View(fullModel);
         }
 
         // GET: Transactions/Details/5
@@ -74,10 +86,24 @@ namespace HF.Web.Controllers
             }
 
             var transaction = await _context.Transaction.FindAsync(id);
+
             if (transaction == null)
             {
                 return NotFound();
             }
+
+            var operations = new SelectList(_context.Operation, "Id", "Name", transaction.OperationId);
+            ViewBag.Operations = operations;
+            
+            var categories = new SelectList(_context.Category, "Id", "Name", transaction.CategoryId);
+            ViewBag.Categories = categories;
+            
+            var currencies = new SelectList(_context.Currency, "Id", "Name", transaction.CurrencyId);
+            ViewBag.Currencies = currencies;
+            
+            var units = new SelectList(_context.Unit, "Id", "Name", transaction.UnitId);
+            ViewBag.Units = units;
+            
             return View(transaction);
         }
 
@@ -86,7 +112,7 @@ namespace HF.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,OperationDateTime")] Transaction transaction)
+        public async Task<IActionResult> Edit(int id, Transaction transaction)
         {
             if (id != transaction.Id)
             {

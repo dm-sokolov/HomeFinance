@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,18 +10,28 @@ namespace HF.Web.Models
     {
         public int Id { get; set; }
 
+        [DisplayName("Тип операции")]
         public Operation Operation { get; set; }
+        public int OperationId { get; set; }
+        
 
+        [DisplayName("Сумма")]
         public decimal Amount { get; set; }
 
-
+        [DisplayName("Ед.изм.")]
         public Unit Unit { get; set; }
+        public int UnitId { get; set; }
 
+        [DisplayName("Валюта")]
         public Currency Currency { get; set; }
+        public int CurrencyId { get; set; }
 
+        [DisplayName("Дата/Время")]
         public DateTime OperationDateTime { get; set; }
 
+        [DisplayName("Категория")]
         public Category Category { get; set; }
+        public int CategoryId { get; set; }
     }
 
     public class Category

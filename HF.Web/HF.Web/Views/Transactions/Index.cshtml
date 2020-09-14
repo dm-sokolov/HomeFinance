@@ -13,22 +13,55 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Operation)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OperationDateTime)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit)
+            </th>
+            <th>
+                Действия 
+            </th>
+
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
+                @Html.DisplayFor(model => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OperationDateTime)
+                @Html.DisplayFor(model => item.Operation.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.OperationDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Currency.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Unit.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
