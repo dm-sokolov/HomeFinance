@@ -16,5 +16,13 @@ namespace HF.Web.Data
         }
 
         public DbSet<HF.Web.Models.Currency> Currency { get; set; }
+
+        public DbSet<HF.Web.Models.Category> Category { get; set; }
+
+        public DbSet<HF.Web.Models.Operation> Operation { get; set; }
+
+        public DbSet<HF.Web.Models.Unit> Unit { get; set; }
+
+        public DbSet<HF.Web.Models.Transaction> Transaction { get; set; }
     }
 }
