@@ -31,7 +31,7 @@ namespace HF.Web.Models
 
         [DisplayName("Категория")]
         //public ICollection<Category> Categories { get; set; } = new List<Category>();
-        public Category Category { get; set; }
+        //public Category Category { get; set; }
         public int CategoryId { get; set; }
         
         [DisplayName("Для кого оплачено")]

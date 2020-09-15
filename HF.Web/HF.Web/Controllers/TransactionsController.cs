@@ -28,7 +28,7 @@ namespace HF.Web.Controllers
                 Id = s.Id,
                 Amount = s.Amount,
                 OperationDateTime = s.OperationDateTime,
-                Category = _context.Category.FirstOrDefault(w=>w.Id==s.CategoryId),
+                //Category = _context.Category.FirstOrDefault(w=>w.Id==s.CategoryId),
                 Currency = _context.Currency.FirstOrDefault(w=>w.Id==s.CurrencyId),
                 Operation = _context.Operation.FirstOrDefault(w=>w.Id==s.OperationId),
                 Unit = _context.Unit.FirstOrDefault(w=>w.Id==s.UnitId)
@@ -104,8 +104,8 @@ namespace HF.Web.Controllers
             var operations = new SelectList(_context.Operation, "Id", "Name", transaction?.OperationId ?? 1);
             ViewBag.Operations = operations;
 
-            var categories = new SelectList(_context.Category, "Id", "Name", transaction?.CategoryId ?? 1);
-            ViewBag.Categories = categories;
+            // var categories = new SelectList(_context.Category, "Id", "Name", transaction?.CategoryId ?? 1);
+            // ViewBag.Categories = categories;
 
             var currencies = new SelectList(_context.Currency, "Id", "Name", transaction?.CurrencyId ?? 1);
             ViewBag.Currencies = currencies;
