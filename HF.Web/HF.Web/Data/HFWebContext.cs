@@ -12,7 +12,7 @@ namespace HF.Web.Data
         public HFWebContext (DbContextOptions<HFWebContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<HF.Web.Models.Currency> Currency { get; set; }
@@ -24,5 +24,9 @@ namespace HF.Web.Data
         public DbSet<HF.Web.Models.Unit> Unit { get; set; }
 
         public DbSet<HF.Web.Models.Transaction> Transaction { get; set; }
+
+        public DbSet<HF.Web.Models.Contractor> Contractor { get; set; }
+
+        public DbSet<HF.Web.Models.Recipient> Recipient { get; set; }
     }
 }

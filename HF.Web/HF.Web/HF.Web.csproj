@@ -1,8 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200915173040_add2column.cs" />
+    <Compile Remove="Migrations\20200915173040_add2column.Designer.cs" />
+    <Compile Remove="Migrations\20200915173611_add2column1.cs" />
+    <Compile Remove="Migrations\20200915173611_add2column1.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />

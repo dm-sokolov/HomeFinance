@@ -28,10 +28,10 @@ namespace HF.Web.Controllers
                 Id = s.Id,
                 Amount = s.Amount,
                 OperationDateTime = s.OperationDateTime,
-                Category = _context.Category.Where(w=>w.Id==s.CategoryId).Select(k=>k).FirstOrDefault(),
-                Currency = _context.Currency.Where(w=>w.Id==s.CurrencyId).Select(k=>k).FirstOrDefault(),
-                Operation = _context.Operation.Where(w=>w.Id==s.OperationId).Select(k=>k).FirstOrDefault(),
-                Unit = _context.Unit.Where(w=>w.Id==s.UnitId).Select(k=>k).FirstOrDefault()
+                Category = _context.Category.FirstOrDefault(w=>w.Id==s.CategoryId),
+                Currency = _context.Currency.FirstOrDefault(w=>w.Id==s.CurrencyId),
+                Operation = _context.Operation.FirstOrDefault(w=>w.Id==s.OperationId),
+                Unit = _context.Unit.FirstOrDefault(w=>w.Id==s.UnitId)
             }).ToList();
             
             return View(fullModel);
@@ -51,13 +51,14 @@ namespace HF.Web.Controllers
             {
                 return NotFound();
             }
-
+            
             return View(transaction);
         }
 
         // GET: Transactions/Create
         public IActionResult Create()
         {
+            PrepareSelectLists();
             return View();
         }
 
@@ -66,15 +67,16 @@ namespace HF.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Amount,OperationDateTime")] Transaction transaction)
+        public async Task<IActionResult> Create(Transaction transaction)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(transaction);
+            //PrepareSelectLists(transaction);
+            //return View(transaction);
         }
 
         // GET: Transactions/Edit/5
@@ -92,19 +94,24 @@ namespace HF.Web.Controllers
                 return NotFound();
             }
 
-            var operations = new SelectList(_context.Operation, "Id", "Name", transaction.OperationId);
-            ViewBag.Operations = operations;
-            
-            var categories = new SelectList(_context.Category, "Id", "Name", transaction.CategoryId);
-            ViewBag.Categories = categories;
-            
-            var currencies = new SelectList(_context.Currency, "Id", "Name", transaction.CurrencyId);
-            ViewBag.Currencies = currencies;
-            
-            var units = new SelectList(_context.Unit, "Id", "Name", transaction.UnitId);
-            ViewBag.Units = units;
-            
+            PrepareSelectLists(transaction);
+
             return View(transaction);
+        }
+
+        private void PrepareSelectLists(Transaction transaction = null)
+        {
+            var operations = new SelectList(_context.Operation, "Id", "Name", transaction?.OperationId ?? 1);
+            ViewBag.Operations = operations;
+
+            var categories = new SelectList(_context.Category, "Id", "Name", transaction?.CategoryId ?? 1);
+            ViewBag.Categories = categories;
+
+            var currencies = new SelectList(_context.Currency, "Id", "Name", transaction?.CurrencyId ?? 1);
+            ViewBag.Currencies = currencies;
+
+            var units = new SelectList(_context.Unit, "Id", "Name", transaction?.UnitId ?? 1);
+            ViewBag.Units = units;
         }
 
         // POST: Transactions/Edit/5

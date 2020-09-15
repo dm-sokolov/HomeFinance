@@ -13,7 +13,7 @@ namespace HF.Web.Models
         [DisplayName("Тип операции")]
         public Operation Operation { get; set; }
         public int OperationId { get; set; }
-        
+
 
         [DisplayName("Сумма")]
         public decimal Amount { get; set; }
@@ -30,11 +30,35 @@ namespace HF.Web.Models
         public DateTime OperationDateTime { get; set; }
 
         [DisplayName("Категория")]
+        //public ICollection<Category> Categories { get; set; } = new List<Category>();
         public Category Category { get; set; }
         public int CategoryId { get; set; }
+        
+        [DisplayName("Для кого оплачено")]
+        public Recipient Recipient { get; set; }
+        public int RecipientId { get; set; }
+        
+        [DisplayName("Кому оплачено")]
+        public Contractor Contractor { get; set; }
+        public int ContractorId { get; set; }
+
+        
+        
     }
 
+    public class Contractor
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    
     public class Category
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    
+    public class Recipient
     {
         public int Id { get; set; }
         public string Name { get; set; }
