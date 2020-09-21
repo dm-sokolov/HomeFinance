@@ -28,6 +28,9 @@ namespace HF.Web.Controllers
                 .Include(t => t.Operation)
                 .Include(t => t.Recipient)
                 .Include(t => t.Unit);
+            
+            
+            
             return View(await hFWebContext.ToListAsync());
         }
 

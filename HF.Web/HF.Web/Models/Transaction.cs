@@ -30,7 +30,9 @@ namespace HF.Web.Models
         public DateTime OperationDateTime { get; set; }
 
         [DisplayName("Категория")]
-        public ICollection<Category> Categories { get; set; } = new List<Category>();
+        //public ICollection<Category> Categories { get; set; } = new List<Category>();
+        public ICollection<TransactionCategory> TransactionCategories { get; set; } = new List<TransactionCategory>();
+
         //public Category Category { get; set; }
         //public int CategoryId { get; set; }
         
@@ -56,6 +58,17 @@ namespace HF.Web.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        
+        public ICollection<TransactionCategory> TransactionCategories { get; set; } = new List<TransactionCategory>();
+    }
+
+    public class TransactionCategory
+    {
+        public int TransactionId { get; set; }
+        public Transaction Transaction { get; set; }
+        
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
     
     public class Recipient
